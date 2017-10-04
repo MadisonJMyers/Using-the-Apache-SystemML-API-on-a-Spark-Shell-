@@ -6,7 +6,7 @@
 
 ## Not familiar with SystemML?
 
-### At a high-level, SystemML is what is used for the machine learning and mathematical part of your data science project. You can log into Spark Shell, load SystemML on the shell, load your data and write your linear algebra, statistical equations, matrices, etc. in code much shorter than it would be in the Spark shell syntax. It helps not only with mathematical exploration and machine learning algorithms, but it allows you to be on Spark where you can do all of the above with really big data that you couldn't use on your local computer. Focusing on this step of your project, let's walk through how to set your computer up for all of SystemML's assumptions, how to load Spark Shell, load SystemML, load data and do a few examples in scala. (I promise a PySpark tutorial will come in the future!)
+### At a high-level, SystemML is what is used for the machine learning and mathematical part of your data science project. You can log into Spark Shell, load SystemML on the shell, load your data and write your linear algebra, statistical equations, matrices, etc. in code much shorter than it would be in the Spark shell syntax. It helps not only with mathematical exploration and machine learning algorithms, but it also allows you to be on Spark where you can do all of the above with really big data that you couldn't use on your local computer. Focusing on this step of your pipeline, let's walk through how to set up your computer for all of SystemML's assumptions, how to load Spark Shell, load SystemML, load data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
 
 ## Now let's get going on our learning. First step: assumptions for SystemML.
 
