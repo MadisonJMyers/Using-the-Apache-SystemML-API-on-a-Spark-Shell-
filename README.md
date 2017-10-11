@@ -12,7 +12,7 @@
 
 ### By using the IBM Analytics Engine you can spin up a Spark cluster in just a few minutes using the web user interface.
 
-### With both of these tools, I'll walk you through how to set up your computer for all of SystemML's assumptions, how to set up IAE and your spark cluster, SSH in to connect to your Spark cluster on your computer and load Spark Shell with SystemML,then load some data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
+### With both of these tools, I'll walk you through how to set up your computer for all of SystemML's assumptions, how to set up IAE and your Spark cluster, SSH in to connect to your Spark cluster on your computer and load Spark Shell with SystemML,then load some data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
 
 ## Now let's get going on our learning. First step: assumptions for SystemML.
 
@@ -26,14 +26,14 @@ brew install apache-spark
 
 
 ## Now let's set up IAE! Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
-### (this assumes you have an account, so if you do not, go ahead and set one up and come back to this step)
+### (This assumes you have an account, so if you do not, go ahead and set one up and come back to this step)
 
-### select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
+### Select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
 ### Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and push "Create" at the bottom of the page. This may take a few minutes.
 
 ## Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
 
-### Go ahead and copy your username and password and push "Launch Console" to log you in to Ambari.
+### Go ahead and copy your username and password and push "Launch Console" to log you into Ambari.
 
 ### Once that's complete go back to your "Manage" console and copy your SSH line.
 
@@ -41,7 +41,7 @@ brew install apache-spark
 
 ## Logged in? You're a rockstar! Now we can start SystemML!
 
-### First download SystemML
+### First download SystemML (we are still at your terminal)
 
 wget https://sparktc.ibmcloud.com/repo/latest/SystemML.jar  
 
@@ -184,7 +184,7 @@ sumMessage: String = s2 is greater
 
 ## Here is the really handy part. As another example you can load in your data, type the short code and get a whole table of standard statistical measures for each feature!
 
-### Let's first get our data into Spark.
+### To do this, let's first get our data into Spark.
 ### We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
 
 scala> val habermanUrl = "http://archive.ics.uci.edu/ml/machine-learning-databases/haberman/haberman.data"
