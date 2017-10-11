@@ -1,43 +1,34 @@
-# Using the Apache SystemML API on a Spark Shell with IBM Analytics Engine
+# Using the Apache SystemML API in a Spark shell with IBM Analytics Engine
 
-## SystemML on Spark Shell using the IBM Analytics Engine (IAE)? Yes!
+## SystemML in a Spark shell using the IBM Analytics Engine (IAE)? Yes!
 
-## A very simple way of using SystemML for all of your machine learning and big data needs. This tutorial will get you set up and running SystemML on the Spark Shell using IAE like a star.
+## A very simple way of using SystemML for all of your machine learning and big data needs. This tutorial will get you set up and running SystemML in a Spark shell using IAE like a star.
 
 ## Not familiar with Apache SystemML?
 
-### At a high-level, SystemML is what is used for the machine learning and mathematical part of your data science project. You can log into Spark Shell, load SystemML on the shell, load your data and write your linear algebra, statistical equations, matrices, etc. in code much shorter than it would be in the Spark shell syntax. It helps not only with mathematical exploration and machine learning algorithms, but it also allows you to be on Spark where you can do all of the above with really big data that you couldn't use on your local computer. 
+### At a high-level, SystemML is what is used for the machine learning and mathematical part of your data science project. You can log into Spark shell, load SystemML in the shell, load your data and write your linear algebra, statistical equations, matrices, etc. in code much shorter than it would be in the typical Spark shell syntax. It helps not only with mathematical exploration and machine learning algorithms, but it also allows you to be on Spark where you can do all of the above with really big data that you couldn't use on your local computer. 
 
 ## Not familiar with how to set up an Apache Spark cluster?
 
 ### By using the IBM Analytics Engine you can spin up a Spark cluster in just a few minutes using the web user interface.
 
-### With both of these tools, I'll walk you through how to set up your computer for all of SystemML's assumptions, how to set up IAE and your Spark cluster, SSH in to connect to your Spark cluster on your computer and load Spark Shell with SystemML,then load some data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
+### With both of these tools, I'll walk you through how to set up your computer for all of SystemML's assumptions, how to set up IAE and your Spark cluster, SSH in to connect to your Spark cluster on your computer and start a Spark shell and import SystemML,then load some data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
 
-## Now let's get going on our learning. First step: assumptions for SystemML.
+## Now let's get going on our learning. First step: Let's set up IAE.
 
-### Have Java, Scala, wget and Spark installed on your computer. (One by one, copy and paste each line into your terminal and push enter.)
-
-    brew tap caskroom/cask  
-    brew install Caskroom/cask/java  
-    brew install scala  
-    brew install wget  
-    brew install apache-spark  
-
-
-## Now let's set up IAE! Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
+## Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
 (This assumes you have an account, so if you do not, go ahead and set one up and come back to this step.)
 
     1) Select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
     2) Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and   push "Create" at the bottom of the page. This may take a few minutes.
 
-    3) Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
+    3) Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are username, password and SSH (under "Connection Details".
 
-    4) Go ahead and copy your username and password and push "Launch Console" to log you into Ambari.
+    4) Start by copying your SSH line. You will also need the password given to you after you SSH to your cluster.
 
-    5) Once that's complete go back to your "Manage" console and copy your SSH line.
-
-    6) Go to your terminal and paste the SSH line in it and press enter. You will be prompted for a password. Use your Ambari password.
+    5) Go to your terminal and paste the SSH line in it and press enter. 
+    
+    6)You will be prompted for a password. Use your the password given to you on the "Manage" console.
 
 ## Logged in? You're a rockstar! Now we can start SystemML!
 
@@ -45,7 +36,7 @@
 
     wget https://sparktc.ibmcloud.com/repo/latest/SystemML.jar  
 
-### Now type the following code to access the Spark Shell with SystemML.
+### Now type the following code to access the Spark shell with SystemML.
 
     spark-shell --executor-memory 4G --driver-memory 4G --jars SystemML.jar  
 
@@ -69,9 +60,9 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 ### Our next step is to parallelize the information, read in two matrices as RDDs, getting the sum of the first, the sum of the second and a message.
 
-    scala> val data1 = sc.parallelize(Array("1.0,2.0", "3.0,4.0”))  
-    scala> val data2 = sc.parallelize(Array("5.0,6.0", "7.0,8.0”))  
-    scala>val s = """  
+    val data1 = sc.parallelize(Array("1.0,2.0", "3.0,4.0"))  
+    val data2 = sc.parallelize(Array("5.0,6.0", "7.0,8.0"))  
+    val s = """  
      | s1 = sum(m1);
      | s2 = sum(m2);
      | if (s1 > s2) {
@@ -83,7 +74,7 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
      | }
      | """
 
-    scala> val script = dml(s).in("m1",data1).in("m2", data2).out("s1","s2", "message”)  
+    val script = dml(s).in("m1",data1).in("m2", data2).out("s1","s2", "message")  
 
 ### Your should get:
 
@@ -99,7 +90,7 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 ### Now print your script info. You should see:
 
-    scala> println(script.info)  
+    println(script.info)  
     Script Type: DML
 
     Inputs:  
@@ -158,7 +149,7 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 ### Execute your script and get your results!
 
-    scala> val results = ml.execute(script)  
+    val results = ml.execute(script)  
     results: org.apache.sysml.api.mlcontext.MLResults =  
     [1] (Double) s1: 10.0
     [2] (Double) s2: 26.0
@@ -166,18 +157,18 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 ### Just as an example, you can set your value as x and get your results in Double form.
 
-    scala> val x = results.getDouble("s1")  
+    val x = results.getDouble("s1")  
     x: Double = 10.0
 
-    scala> val y = results.getDouble("s2")  
+    val y = results.getDouble("s2")  
     y: Double = 26.0
 
-    scala> x + y  
+    x + y  
     res1: Double = 36.0  
 
 ### Here is another version of the example. Because the API is very Scala friendly, you can pull out your results as a Scala tuple.
 
-    scala> val (firstSum, secondSum, sumMessage) = results.getTuple[Double, Double, String]("s1", "s2", "message")  
+    val (firstSum, secondSum, sumMessage) = results.getTuple[Double, Double, String]("s1", "s2", "message")  
     firstSum: Double = 10.0  
     secondSum: Double = 26.0  
     sumMessage: String = s2 is greater  
@@ -187,19 +178,17 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 ### To do this, let's first get our data into Spark.
 We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
 
-    scala> val habermanUrl = "http://archive.ics.uci.edu/ml/machine-learning-databases/haberman/haberman.data"
+    val habermanUrl = "http://archive.ics.uci.edu/ml/machine-learning-databases/haberman/haberman.data"
 
-    scala> val habermanList = scala.io.Source.fromURL(habermanUrl).mkString.split("\n")
+    val habermanList = scala.io.Source.fromURL(habermanUrl).mkString.split("\n")
 
-    scala> val habermanRDD = sc.parallelize(habermanList)
+    val habermanRDD = sc.parallelize(habermanList)
 
-    scala> val typesRDD = sc.parallelize(Array("1.0,1.0,1.0,2.0"))
+    val typesRDD = sc.parallelize(Array("1.0,1.0,1.0,2.0"))
 
-    scala> val scriptUrl = "https://raw.githubusercontent.com/apache/incubator-systemml/master/scripts/algorithms/Univar-Stats.dml"
+    val scriptUrl = "https://raw.githubusercontent.com/apache/incubator-systemml/master/scripts/algorithms/Univar-Stats.dml"
 
-    scala> val script = dmlFromUrl(scriptUrl).in("A", habermanRDD, habermanMetadata).in("K", typesRDD, typesMetadata).in("$CONSOLE_OUTPUT", true)  
-
-    scala> val results = ml.execute(script)
+    val results = ml.execute(script)
 
     Feature [1]: Scale  
      (01) Minimum             | 30.0
@@ -258,22 +247,22 @@ We first want to make sure our data is clean and ready to go. Let's load in some
 
 ### You can also ask for the base stats.
 
-    scala> val baseStats = results.getMatrix("baseStats")  
+    val baseStats = results.getMatrix("baseStats")  
     baseStats: org.apache.sysml.api.mlcontext.Matrix = org.apache.sysml.api.mlcontext.Matrix@237cd4e5
 
-    scala> baseStats.  
+    baseStats.  
     asDataFrame          asDoubleMatrix       asInstanceOf         asJavaRDDStringCSV   asJavaRDDStringIJV   asMLMatrix           asMatrixObject       asRDDStringCSV  
     asRDDStringIJV       isInstanceOf         toString             
 
 ### You can also get the base stats as an RDD. Note: IJV leaves out non values and CSV includes them. Here's an example of both:
 
-    scala> baseStats.asRDDString  
+    baseStats.asRDDString  
     asRDDStringCSV   asRDDStringIJV   
 
-    scala> baseStats.asRDDStringCSV.collect  
+    baseStats.asRDDStringCSV.collect  
     res4: Array[String] = Array(30.0,58.0,0.0,0.0, 83.0,69.0,52.0,0.0, 53.0,11.0,52....1.0)
 
-    scala> baseStats.asRDDStringIJV.collect  
+    baseStats.asRDDStringIJV.collect  
     res5: Array[String] = Array(1 1 30.0, 1 2 58.0, 1 3 0.0, 1 4 0.0, 2 1 83.0, 2 2 69.0, 2 3 52.0, 2 4 0.0, ... 1...  
 
 ## I think that's a great start to using SystemML with Spark Shell on the IBM Analytics Engine! Once you're done you can quit to exit.
