@@ -26,7 +26,7 @@ brew install apache-spark
 
 
 ## Now let's set up IAE! Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
-### (This assumes you have an account, so if you do not, go ahead and set one up and come back to this step)
+### (This assumes you have an account, so if you do not, go ahead and set one up and come back to this step.)
 
 ### Select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
 ### Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and push "Create" at the bottom of the page. This may take a few minutes.
@@ -201,7 +201,6 @@ scala> val script = dmlFromUrl(scriptUrl).in("A", habermanRDD, habermanMetadata)
 
 scala> val results = ml.execute(script)
 
--------------------------------------------------
 Feature [1]: Scale  
  (01) Minimum             | 30.0
  (02) Maximum             | 83.0
