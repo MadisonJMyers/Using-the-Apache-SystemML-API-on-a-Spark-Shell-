@@ -16,7 +16,7 @@
 
 ## Now let's get going on our learning. First step: assumptions for SystemML.
 
-### Have Java, Scala, wget and Spark installed on your computer.
+### Have Java, Scala, wget and Spark installed on your computer. (One by one, copy and paste each line into your terminal and push enter.)
 
 brew tap caskroom/cask  
 brew install Caskroom/cask/java  
