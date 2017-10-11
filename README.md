@@ -1,12 +1,18 @@
-# Using the Apache SystemML API on a Spark Shell
+# Using the Apache SystemML API on a Spark Shell with IBM Analytics Engine
 
-## SystemML on Spark Shell? Yes!
+## SystemML on Spark Shell using the IBM Analytics Engine (IAE)? Yes!
 
-## A very simple way of using SystemML for all of your machine learning and big data needs. This tutorial will get you set up and running SystemML on the Spark Shell like a star.
+## A very simple way of using SystemML for all of your machine learning and big data needs. This tutorial will get you set up and running SystemML on the Spark Shell using IAE like a star.
 
-## Not familiar with SystemML?
+## Not familiar with Apache SystemML?
 
-### At a high-level, SystemML is what is used for the machine learning and mathematical part of your data science project. You can log into Spark Shell, load SystemML on the shell, load your data and write your linear algebra, statistical equations, matrices, etc. in code much shorter than it would be in the Spark shell syntax. It helps not only with mathematical exploration and machine learning algorithms, but it also allows you to be on Spark where you can do all of the above with really big data that you couldn't use on your local computer. Focusing on this step of your pipeline, let's walk through how to set up your computer for all of SystemML's assumptions, how to load Spark Shell, load SystemML, load data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
+### At a high-level, SystemML is what is used for the machine learning and mathematical part of your data science project. You can log into Spark Shell, load SystemML on the shell, load your data and write your linear algebra, statistical equations, matrices, etc. in code much shorter than it would be in the Spark shell syntax. It helps not only with mathematical exploration and machine learning algorithms, but it also allows you to be on Spark where you can do all of the above with really big data that you couldn't use on your local computer. 
+
+## Not familiar with how to set up an Apache Spark cluster?
+
+### By using the IBM Analytics Engine you can spin up a Spark cluster in just a few minutes using the web user interface.
+
+### With both of these tools, I'll walk you through how to set up your computer for all of SystemML's assumptions, how to set up IAE and your spark cluster, SSH in to connect to your Spark cluster on your computer and load Spark Shell with SystemML,then load some data and do a few examples in scala. Whew that's a lot, but we I promise I go through it all!
 
 ## Now let's get going on our learning. First step: assumptions for SystemML.
 
@@ -18,9 +24,24 @@ brew install scala
 brew install wget  
 brew install apache-spark  
 
-## Now let's set up SystemML!
 
-### Download SystemML.
+## Now let's set up IAE! Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
+### (this assumes you have an account, so if you do not, go ahead and set one up and come back to this step)
+
+### select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
+### Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and push "Create" at the bottom of the page. This may take a few minutes.
+
+## Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
+
+### Go ahead and copy your username and password and push "Launch Console" to log you in to Ambari.
+
+### Once that's complete go back to your "Manage" console and copy your SSH line.
+
+### Go to your terminal and paste the SSH line in it and press enter. You will be prompted for a password. Use your Ambari password.
+
+## Logged in? You're a rockstar! Now we can start SystemML!
+
+### First download SystemML
 
 wget https://sparktc.ibmcloud.com/repo/latest/SystemML.jar  
 
@@ -28,17 +49,17 @@ wget https://sparktc.ibmcloud.com/repo/latest/SystemML.jar
 
 spark-shell --executor-memory 4G --driver-memory 4G --jars SystemML.jar  
 
-### Now, using the Spark Shell (Scala), import the MLContext for SystemML.
+### Now, using the Spark Shell (Scala), import the MLContext to start SystemML.
 
 import org.apache.sysml.api.mlcontext._  
 import org.apache.sysml.api.mlcontext.ScriptFactory._  
 val ml = new MLContext(sc)  
 
-## Congratulations!! NOW YOU ARE IN APACHE SYSTEMML!!
+## Congratulations!! NOW YOU ARE IN APACHE SYSTEMML!! Look at you.
 
-### In the future you will just need to do the last two steps to get this going.
+### In the future you will just need to do the last two steps to get this going and you can also repeat these last steps on a local Spark Shell.
 
-## Let's figure out how to load a script and run it as well as load data and run some examples.
+## Let's now figure out how to load a script and run it as well as load data and run some examples so that you can get familiar with Spark Shell and SystemML.
 
 ## Here's a quick example: Script from a URL.
 ### Here s1 is created by reading Univar-Stats.dml from a URL address.
@@ -256,11 +277,11 @@ res4: Array[String] = Array(30.0,58.0,0.0,0.0, 83.0,69.0,52.0,0.0, 53.0,11.0,52.
 scala> baseStats.asRDDStringIJV.collect  
 res5: Array[String] = Array(1 1 30.0, 1 2 58.0, 1 3 0.0, 1 4 0.0, 2 1 83.0, 2 2 69.0, 2 3 52.0, 2 4 0.0, ... 1...  
 
-## I think that's a great start to using SystemML with Spark Shell! Once you're done you can quit to exit.
+## I think that's a great start to using SystemML with Spark Shell on the IBM Analytics Engine! Once you're done you can quit to exit.
 
 :quit
 
-# You have successfully set up your computer for running SystemML and Spark, loaded the Spark shell, ran scripts, loaded data and run some examples!! Congrats!!
+# You have successfully set up your computer for running SystemML and Spark on the IBM Analytics Engine (IAE), loaded the Spark shell, ran scripts, loaded data and run some examples!! Congrats!! Now go save the world with these awesome new skills.
 
  Copyright 2017 IBM Corp. All Rights Reserved.
 
