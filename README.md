@@ -76,7 +76,7 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
     val script = dml(s).in("m1",data1).in("m2", data2).out("s1","s2", "message")  
 
-### Your should get:
+### You should get:
 
     script: org.apache.sysml.api.mlcontext.Script =  
     Inputs:  
@@ -88,9 +88,12 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
     [2] s2
     [3] message
 
-### Now print your script info. You should see:
+### Now print your script info.
 
-    println(script.info)  
+    println(script.info) 
+    
+### You should see:
+
     Script Type: DML
 
     Inputs:  
@@ -147,9 +150,12 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
     write(s2, '');  
     write(message, '');  
 
-### Execute your script and get your results!
+### Now execute your script and get your results!
 
-    val results = ml.execute(script)  
+    val results = ml.execute(script) 
+    
+### You should get:
+
     results: org.apache.sysml.api.mlcontext.MLResults =  
     [1] (Double) s1: 10.0
     [2] (Double) s2: 26.0
@@ -157,11 +163,20 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 ### Just as an example, you can set your value as x and get your results in Double form.
 
-    val x = results.getDouble("s1")  
+    val x = results.getDouble("s1") 
+    
+### You should get:
+
     x: Double = 10.0
 
-    val y = results.getDouble("s2")  
+### Set value as y:
+    val y = results.getDouble("s2") 
+    
+### You should get:
+
     y: Double = 26.0
+
+### Simple example of adding both:
 
     x + y  
     res1: Double = 36.0  
@@ -169,6 +184,9 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 ### Here is another version of the example. Because the API is very Scala friendly, you can pull out your results as a Scala tuple.
 
     val (firstSum, secondSum, sumMessage) = results.getTuple[Double, Double, String]("s1", "s2", "message")  
+    
+### You should get:
+
     firstSum: Double = 10.0  
     secondSum: Double = 26.0  
     sumMessage: String = s2 is greater  
@@ -189,6 +207,8 @@ We first want to make sure our data is clean and ready to go. Let's load in some
     val scriptUrl = "https://raw.githubusercontent.com/apache/incubator-systemml/master/scripts/algorithms/Univar-Stats.dml"
 
     val results = ml.execute(script)
+    
+### You should see:
 
     Feature [1]: Scale  
      (01) Minimum             | 30.0
@@ -247,7 +267,10 @@ We first want to make sure our data is clean and ready to go. Let's load in some
 
 ### You can also ask for the base stats.
 
-    val baseStats = results.getMatrix("baseStats")  
+    val baseStats = results.getMatrix("baseStats") 
+    
+### You should get:
+
     baseStats: org.apache.sysml.api.mlcontext.Matrix = org.apache.sysml.api.mlcontext.Matrix@237cd4e5
 
     baseStats.  
@@ -257,12 +280,25 @@ We first want to make sure our data is clean and ready to go. Let's load in some
 ### You can also get the base stats as an RDD. Note: IJV leaves out non values and CSV includes them. Here's an example of both:
 
     baseStats.asRDDString  
+    
+### You should get these options:  
+
     asRDDStringCSV   asRDDStringIJV   
 
-    baseStats.asRDDStringCSV.collect  
+### Try as CSV:
+
+    baseStats.asRDDStringCSV.collect 
+    
+### You should get:
+
     res4: Array[String] = Array(30.0,58.0,0.0,0.0, 83.0,69.0,52.0,0.0, 53.0,11.0,52....1.0)
 
-    baseStats.asRDDStringIJV.collect  
+### Try as IJV:
+
+    baseStats.asRDDStringIJV.collect 
+
+### You should get:
+
     res5: Array[String] = Array(1 1 30.0, 1 2 58.0, 1 3 0.0, 1 4 0.0, 2 1 83.0, 2 2 69.0, 2 3 52.0, 2 4 0.0, ... 1...  
 
 ## I think that's a great start to using SystemML with Spark Shell on the IBM Analytics Engine! Once you're done you can quit to exit.
