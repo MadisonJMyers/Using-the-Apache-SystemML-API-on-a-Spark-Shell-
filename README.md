@@ -57,7 +57,7 @@
 
 ## Congratulations!! NOW YOU ARE IN APACHE SYSTEMML!! Look at you.
 
-*In the future you will just need to do the last two steps to get this going and you can also repeat these last steps on a *local Spark Shell.
+In the future you will just need to do the last two steps to get this going and you can also repeat these last steps on a local Spark Shell.
 
 ## Let's now figure out how to load a script and run it as well as load data and run some examples so that you can get familiar with Spark Shell and SystemML.
 
@@ -185,7 +185,7 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 ### Here is another really handy part. As another example you can load in your data, type the short code and get a whole table of standard statistical measures for each feature!
 
 ### To do this, let's first get our data into Spark.
-*We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
+We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
 
     scala> val habermanUrl = "http://archive.ics.uci.edu/ml/machine-learning-databases/haberman/haberman.data"
 
