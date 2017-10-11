@@ -178,7 +178,10 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 ### Simple example of adding both:
 
-    x + y  
+    x + y
+    
+### You should get:
+
     res1: Double = 36.0  
 
 ### Here is another version of the example. Because the API is very Scala friendly, you can pull out your results as a Scala tuple.
