@@ -200,14 +200,13 @@ Here s1 is created by reading Univar-Stats.dml from a URL address.
 We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
 
     val habermanUrl = "http://archive.ics.uci.edu/ml/machine-learning-databases/haberman/haberman.data"
-
     val habermanList = scala.io.Source.fromURL(habermanUrl).mkString.split("\n")
-
     val habermanRDD = sc.parallelize(habermanList)
-
+    val habermanMetadata = new MatrixMetadata(306, 4)
     val typesRDD = sc.parallelize(Array("1.0,1.0,1.0,2.0"))
-
-    val scriptUrl = "https://raw.githubusercontent.com/apache/incubator-systemml/master/scripts/algorithms/Univar-Stats.dml"
+    val typesMetadata = new MatrixMetadata(1, 4)
+    val scriptUrl = "https://raw.githubusercontent.com/apache/systemml/master/scripts/algorithms/Univar-Stats.dml"
+    val script = dmlFromUrl(scriptUrl).in("A", habermanRDD, habermanMetadata).in("K", typesRDD, typesMetadata).in("$CONSOLE_OUTPUT", true).out("baseStats")
 
     val results = ml.execute(script)
     
@@ -268,7 +267,7 @@ We first want to make sure our data is clean and ready to go. Let's load in some
     results: org.apache.sysml.api.mlcontext.MLResults =  
     [1] (Matrix) baseStats: Matrix: scratch_space/_p5250_9.31.116.229/parfor/2_resultmerge1, [17 x 4, nnz=44, blocks (1000 x 1000)], binaryblock, dirty
 
-### You can also ask for the base stats.
+### You can also ask for the base stats as a SystemML Matrix.
 
     val baseStats = results.getMatrix("baseStats") 
     
@@ -276,21 +275,23 @@ We first want to make sure our data is clean and ready to go. Let's load in some
 
     baseStats: org.apache.sysml.api.mlcontext.Matrix = org.apache.sysml.api.mlcontext.Matrix@237cd4e5
 
-    baseStats.  
+### With that Matrix you can convert it into a bunch of different things!
+
+    baseStats.      
     asDataFrame          asDoubleMatrix       asInstanceOf         asJavaRDDStringCSV   asJavaRDDStringIJV   asMLMatrix           asMatrixObject       asRDDStringCSV  
     asRDDStringIJV       isInstanceOf         toString             
 
-### You can also get the base stats as an RDD. Note: IJV leaves out non values and CSV includes them. Here's an example of both:
+### Such as you can get the base stats as an RDD. Note: IJV leaves out non values and CSV includes them. Here's an example of both:
 
-    baseStats.asRDDString  
+    baseStats.toRDDString  
     
 ### You should get these options:  
 
-    asRDDStringCSV   asRDDStringIJV   
+    toRDDStringCSV   toRDDStringIJV   
 
 ### Try as CSV:
 
-    baseStats.asRDDStringCSV.collect 
+    baseStats.toRDDStringCSV.collect 
     
 ### You should get:
 
@@ -298,7 +299,7 @@ We first want to make sure our data is clean and ready to go. Let's load in some
 
 ### Try as IJV:
 
-    baseStats.asRDDStringIJV.collect 
+    baseStats.toRDDStringIJV.collect 
 
 ### You should get:
 
