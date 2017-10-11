@@ -28,16 +28,16 @@ brew install apache-spark
 ## Now let's set up IAE! Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
 (This assumes you have an account, so if you do not, go ahead and set one up and come back to this step.)
 
-### Select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
-### Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and push "Create" at the bottom of the page. This may take a few minutes.
+    ### Select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
+    ### Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and   push "Create" at the bottom of the page. This may take a few minutes.
 
-### Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
+    ### Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
 
-### Go ahead and copy your username and password and push "Launch Console" to log you into Ambari.
+    ### Go ahead and copy your username and password and push "Launch Console" to log you into Ambari.
 
-### Once that's complete go back to your "Manage" console and copy your SSH line.
+    ### Once that's complete go back to your "Manage" console and copy your SSH line.
 
-### Go to your terminal and paste the SSH line in it and press enter. You will be prompted for a password. Use your Ambari password.
+    ### Go to your terminal and paste the SSH line in it and press enter. You will be prompted for a password. Use your Ambari password.
 
 ## Logged in? You're a rockstar! Now we can start SystemML!
 
