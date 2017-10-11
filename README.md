@@ -26,12 +26,12 @@ brew install apache-spark
 
 
 ## Now let's set up IAE! Go to https://developer.ibm.com/clouddataservices/docs/ibm-analytics-engine/
-### (This assumes you have an account, so if you do not, go ahead and set one up and come back to this step.)
+(This assumes you have an account, so if you do not, go ahead and set one up and come back to this step.)
 
 ### Select "IBM Analytics Engine service on Bluemix" beneath the video (which is super handy if you want to watch it!)
 ### Now choose which selections you want (you can leave everything at its default for the purpose of this tutorial) and push "Create" at the bottom of the page. This may take a few minutes.
 
-## Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
+### Once your cluster has been created, make sure you are in the "Manage" section. If you are not, navigate to it! In this section you'll notice there is a lot of information. The areas you want to focus on are "Launch Console", username, password and SSH.
 
 ### Go ahead and copy your username and password and push "Launch Console" to log you into Ambari.
 
@@ -57,12 +57,12 @@ val ml = new MLContext(sc)
 
 ## Congratulations!! NOW YOU ARE IN APACHE SYSTEMML!! Look at you.
 
-### In the future you will just need to do the last two steps to get this going and you can also repeat these last steps on a local Spark Shell.
+*In the future you will just need to do the last two steps to get this going and you can also repeat these last steps on a *local Spark Shell.
 
 ## Let's now figure out how to load a script and run it as well as load data and run some examples so that you can get familiar with Spark Shell and SystemML.
 
 ## Here's a quick example: Script from a URL.
-### Here s1 is created by reading Univar-Stats.dml from a URL address.
+Here s1 is created by reading Univar-Stats.dml from a URL address.
 
 val uniUrl = "https://raw.githubusercontent.com/apache/incubator-systemml/master/scripts/algorithms/Univar-Stats.dml"  
 val s1 = ScriptFactory.dmlFromUrl(uniUrl)  
@@ -164,7 +164,7 @@ results: org.apache.sysml.api.mlcontext.MLResults =
 [2] (Double) s2: 26.0
 [3] (String) message: s2 is greater
 
-## Just as an example, you can set your value as x and get your results in Double form.
+### Just as an example, you can set your value as x and get your results in Double form.
 
 scala> val x = results.getDouble("s1")  
 x: Double = 10.0
@@ -175,17 +175,17 @@ y: Double = 26.0
 scala> x + y  
 res1: Double = 36.0  
 
-## Here is another version. Because the API is very Scala friendly, you can pull out your results as a Scala tuple.
+### Here is another version of the example. Because the API is very Scala friendly, you can pull out your results as a Scala tuple.
 
 scala> val (firstSum, secondSum, sumMessage) = results.getTuple[Double, Double, String]("s1", "s2", "message")  
 firstSum: Double = 10.0  
 secondSum: Double = 26.0  
 sumMessage: String = s2 is greater  
 
-## Here is the really handy part. As another example you can load in your data, type the short code and get a whole table of standard statistical measures for each feature!
+### Here is another really handy part. As another example you can load in your data, type the short code and get a whole table of standard statistical measures for each feature!
 
 ### To do this, let's first get our data into Spark.
-### We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
+*We first want to make sure our data is clean and ready to go. Let's load in some data and run a SystemML script.
 
 scala> val habermanUrl = "http://archive.ics.uci.edu/ml/machine-learning-databases/haberman/haberman.data"
 
